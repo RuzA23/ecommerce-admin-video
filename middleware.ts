@@ -5,11 +5,6 @@ const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)"]);
 export default clerkMiddleware((auth, request) => {
   const { method } = request;
 
-  // Exclude GET requests from requiring authentication
-  if (method === "GET") {
-    return;
-  }
-
   if (!isPublicRoute(request)) {
     auth().protect();
   }
